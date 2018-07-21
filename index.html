@@ -3,12 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>CV-pages</title>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marx/2.0.4/marx.css"> -->
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/css/uikit.min.css" />
+<!-- jQuery is required -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- UIkit JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
 <main>
-  <h1>GitHub Pages のサンプルです</h1>
+  <!-- 背景を青に -->
+  <div class="uk-section uk-section-primary">
+      プライマリー(青色)になります。
+  </div>
+
+  <!-- 背景を画像に -->
+  <div class="uk-section uk-section-media uk-background-cover" style="background-image: url('PATH')">
+      .uk-background-coverクラスをつけると、画像がコンテンツを埋めるように中央配置されます。
+  </div>
 </main>
 <!-- javascriptも使える -->
 <script>
