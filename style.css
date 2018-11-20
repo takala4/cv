@@ -1,0 +1,43 @@
+.table-sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+
+.nav-sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.div-sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+body{
+    color: black;
+}
+
+h1{
+    font-weight: 400;
+}
+
+h2{
+    font-weight: 500;
+    color: black;
+}
+
+body{ 
+    font-family: "Noto Sans Japanese";
+    font-weight: 200;
+}
+
+li{
+    font-weight: 200;
+    padding: 1%;
+}
+
+
