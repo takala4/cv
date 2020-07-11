@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>酒井高良の個人ページ</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/css/uikit.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
+    <!-- jQuery is required -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
+    <meta charset="UTF-8">
+    <!-- Favi con -->
+    <link rel="shortcut icon" type="image/png" href="image/4-black.png">
+    <!-- add the button style & script -->
+    <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css" />
+    <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
+    <style>
+        applause-button {
+            width: 48px;
+            height: 48px;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+        <h1>積読の一覧</h1>
+        <table class="uk-table uk-table-justify uk-table-divider uk-vertical-align-middle uk-align-center">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">#</th>
+                    <th class="uk-width-2xlarge">タイトル</th>
+                    <th>Clap</th>
+                </tr>
+            </thead>
+            <tbody>
+<!--                ここに入る-->
+            </tbody>
+        </table>
+    </div>
+    <script type="application/javascript">
+                function write_member() {
+            var recState = true;
+            $.getJSON("books.json", function(data) {
+                var $detpos = $("tbody");
+                for (var id in data) {
+                    $detpos.prepend('<tr><td></td><td>' + id + '</td><td><applause-button color="black" /></td></tr>');
+                }
+            });
+        }
+        write_member();
+    </script>
+</body>
+    
+</html>
