@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,6 +28,28 @@
             margin-left: 5px;
         }
     </style>
+
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCZLnTUdLzs4YEn-f7Dig4XQWl3XXPtcgU",
+            authDomain: "takala-books.firebaseapp.com",
+            databaseURL: "https://takala-books.firebaseio.com",
+            projectId: "takala-books",
+            storageBucket: "takala-books.appspot.com",
+            messagingSenderId: "542998720057",
+            appId: "1:542998720057:web:3d52aa7503b071ce29a7e8",
+            measurementId: "G-YX2HH373SK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
 </head>
 
 <body>
@@ -38,11 +61,11 @@
                 <tr>
                     <th class="uk-width-small">#</th>
                     <th class="uk-width-2xlarge">タイトル</th>
-                    <th>Clap</th>
+                    <th>star</th>
                 </tr>
             </thead>
             <tbody>
-<!--                ここに入る-->
+                <!--                ここに入る-->
             </tbody>
         </table>
         <h3>このページについて</h3>
@@ -53,17 +76,50 @@
             <li>このページはGitHubの静的ホスティングサービスを使用しています</li>
         </ul>
     </div>
+    <div id="message">
+        <h3>登録テスト</h3>
+        <ul>
+            <li id="chatText"></li>
+            <li><input type="text" name="" id="my_text"></li>
+            <li><a onclick="changeData()">更新</a></li>
+        </ul>
+    </div>
     <script type="application/javascript">
-                function write_member() {
-            var recState = true;
-            $.getJSON("books.json", function(data) {
-                var $detpos = $("tbody");
-                for (var id in data) {
-                    $detpos.prepend('<tr><td></td><td>' + id + '</td><td><applause-button color="black" /></td></tr>');
-                }
+        function write_books() {
+            var $detpos = $("tbody");
+
+            var db = firebase.database();
+            var books = db.ref("/books");
+
+            books.once("value")
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var ISBN = childSnapshot.key;
+                        var stars = childSnapshot.child('stars').val();
+                        var title = childSnapshot.child('title').val();
+                        $detpos.prepend('<tr><td></td><td>' + title +
+                            '</td><td>' + stars + '</td></tr>');
+                    });
+                });
+        }
+
+        write_books();
+
+
+        //Firebase-test
+        var db = firebase.database();
+        var target_ISBN = "9784478910184";
+        var book = db.ref("/books/" + target_ISBN);
+
+
+        function changeData() {
+            var title = document.getElementById("my_text").value;
+            book.set({
+                title: title,
+                stars: 1,
             });
         }
-        write_member();
     </script>
 </body>
+
 </html>
