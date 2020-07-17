@@ -52,3 +52,24 @@ table > tbody > tr {
 table > tbody > tr > td:first-child::before {
   content: counter(rowCount);
 }
+
+.star{
+  height: 2.0em;
+  width: 2.0em;
+  display: inline-block;
+  background-color:#ff0081;
+  -webkit-mask-image: url(image/star.svg);
+  mask-image: url(image/star.svg);
+  mask-size: 2.0em 2.0em;
+  -webkit-mask-size: 2.0em 2.0em;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  mask-position: bottom;
+  opacity: 0.70;
+  cursor: pointer;
+}
+.star:hover
+{
+    opacity:1.0;
+}
+
+

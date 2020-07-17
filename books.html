@@ -17,18 +17,8 @@
     <meta charset="UTF-8">
     <!-- Favi con -->
     <link rel="shortcut icon" type="image/png" href="image/4-black.png">
-    <!-- add the button style & script -->
-    <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css" />
-    <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
-    <style>
-        applause-button {
-            width: 48px;
-            height: 48px;
-            margin-top: 5px;
-            margin-left: 5px;
-        }
-    </style>
 
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
@@ -56,22 +46,26 @@
     <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
         <h1>積読リスト</h1>
         （たぶん）教科書，Kindle，漫画，小説を除く積読の一覧．「さっさと読め」と思う書籍にSTARを頂けると良いプレッシャーになります．
-        <table class="uk-table uk-table-justify uk-table-divider uk-vertical-align-middle uk-align-center">
+        
+        <br>
+
+        <table class="uk-table uk-table-justify uk-table-divider uk-vertical-align-middle uk-table-middle">
             <thead>
                 <tr>
                     <th class="uk-width-small">#</th>
                     <th class="uk-width-2xlarge">タイトル</th>
-                    <th>star</th>
+                    <th class="uk-text-center">star</th>
                 </tr>
             </thead>
             <tbody>
                 <!--ここに入る-->
             </tbody>
         </table>
+
         <h3>このページについて</h3>
         <ul>
             <li>個人的な興味・関心によるものです．このページでは特定の書籍の批評を目的としていません．</li>
-            <li>読了後の書評はbook meterというサービスに投稿しています．</li>
+            <li>読了後の書評は読書メーターというサービスに投稿しています．</li>
             <li>書籍にはAmazon.co.jpアソシエイト・プログラムによるリンクが貼られています．</li>
         </ul>
     </div>
@@ -81,7 +75,7 @@
             var $detpos = $("tbody");
 
             var db = firebase.database();
-            var books = db.ref("/books");
+            var books = db.ref("/books").orderByChild('stars');
 
             books.once("value")
                 .then(function (snapshot) {
@@ -91,12 +85,15 @@
                         var author = childSnapshot.child('author').val();
                         var link = childSnapshot.child('amazon').val();
                         var title = childSnapshot.child('title').val();
-                        $detpos.prepend('<tr><td></td><td><a href="' + link + '">' + title +
-                        '</a></td><td><span id=' + ISBN + ' onclick="star(this.id)" align="center" uk-icon="icon: star; ratio: 1.5">' + stars + '</span></td></tr>');
+                        $detpos.prepend('<tr><td></td><td><a href="' + link + '">' 
+                            + title +　'</a></td><td><div id=star-' + ISBN 
+                            + ' class="uk-text-center uk-padding-remove">' + stars + '</div><div id=' + ISBN 
+                            + ' onclick="star(this.id)"  class="star uk-text-center">' 
+                            + '</div></td></tr>');
                     });
                 });
         }
-
+ 
         write_books();
 
         function star(ISBN){
@@ -105,7 +102,7 @@
             book.once('value').then(function (snapshot) {
                 var stars = snapshot.val().stars + 1;
                 book.update({stars:stars})
-                document.getElementById(ISBN).innerHTML= stars + '<' + document.getElementById(ISBN).innerHTML.replace(/[0-9]{1,}</g,'');
+                document.getElementById('star-' + ISBN).textContent = stars;
             });
         };
         
@@ -117,6 +114,24 @@
                 stars: 1,
             });
         }
+
+        var animateButton = function (e) {
+
+                e.preventDefault;
+                //reset animation
+                e.target.classList.remove('animate');
+
+                e.target.classList.add('animate');
+                setTimeout(function () {
+                    e.target.classList.remove('animate');
+                }, 700);
+            };
+
+            var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+            for (var i = 0; i < bubblyButtons.length; i++) {
+                bubblyButtons[i].addEventListener('click', animateButton, false);
+            }
     </script>
 </body>
 
