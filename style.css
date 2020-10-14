@@ -72,4 +72,9 @@ table > tbody > tr > td:first-child::before {
     opacity:1.0;
 }
 
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}

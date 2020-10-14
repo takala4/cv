@@ -8,7 +8,187 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/css/uikit.min.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link href="https://fonts<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>積読リスト</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/css/uikit.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./iota.css" />
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
+    <!-- jQuery is required -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
+    <meta charset="UTF-8">
+    <!-- Favi con -->
+    <link rel="shortcut icon" type="image/png" href="image/4-black.png">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCZLnTUdLzs4YEn-f7Dig4XQWl3XXPtcgU",
+            authDomain: "takala-books.firebaseapp.com",
+            databaseURL: "https://takala-books.firebaseio.com",
+            projectId: "takala-books",
+            storageBucket: "takala-books.appspot.com",
+            messagingSenderId: "542998720057",
+            appId: "1:542998720057:web:3d52aa7503b071ce29a7e8",
+            measurementId: "G-YX2HH373SK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+
+
+
+<body>
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+
+        <h1>積読リスト</h1>
+        <p>
+            （たぶん）電子書籍，漫画，小説を除く積読の一覧．グリッド形式の表示は試行中です．ページ下部にリスト形式のものがあります．        
+        </p>
+
+
+        <div class="uk-margin">
+            <div id="grid_table" class="grid" style="--cols-xl: 6;">
+                <!-- ここにgrid -->
+            </div>
+        </div>
+        <p>
+            「さっさと読め」と思う書籍にSTARを頂けると良いプレッシャーになります．
+        </p>
+        <table class="uk-table uk-table-justify uk-table-divider uk-vertical-align-middle uk-table-middle">
+            <thead>
+                <tr>
+                    <th class="uk-width-small">#</th>
+                    <th class="uk-width-2xlarge">タイトル</th>
+                    <th class="uk-text-center">star</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--ここにlist-->
+            </tbody>
+        </table>
+
+        <h3>このページについて</h3>
+        <ul>
+            <li>個人的な興味・関心によるものです．このページでは特定の書籍の批評を目的としていません．</li>
+            <li>読了後の書評は読書メーターに投稿しています．</li>
+            <li>書籍にはAmazon.co.jpアソシエイト・プログラムによるリンクが貼られています．</li>
+        </ul>
+    </div>
+
+    <script type="application/javascript">
+        function write_books() {
+            var $detpos = $("tbody");
+
+            var db = firebase.database();
+            var books = db.ref("/books").orderByChild('stars');
+
+            books.once("value")
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var ISBN = childSnapshot.key;
+                        var stars = childSnapshot.child('stars').val();
+                        var author = childSnapshot.child('author').val();
+                        var link = childSnapshot.child('amazon').val();
+                        var title = childSnapshot.child('title').val();
+                        $detpos.prepend('<tr><td></td><td><a href="' + link + '">' 
+                            + title +　'</a></td><td><div id=star-' + ISBN 
+                            + ' class="uk-text-center uk-padding-remove">' + stars + '</div><div id=' + ISBN 
+                            + ' onclick="star(this.id)"  class="star uk-text-center">' 
+                            + '</div></td></tr>');
+                    });
+                });
+        }
+
+        function write_grid_books() {
+            var $detpos = $("#grid_table");
+
+            var db = firebase.database();
+            var books = db.ref("/books").orderByChild('stars');
+
+            books.once("value")
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var ISBN = childSnapshot.key;
+                        var stars = childSnapshot.child('stars').val();
+                        var author = childSnapshot.child('author').val();
+                        var link = childSnapshot.child('amazon').val();
+                        var fig_link = childSnapshot.child('amazon_fig').val();
+                        var title = childSnapshot.child('title').val();
+                        // $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' + link + '">' 
+                        //     + title +　'</a></div>');
+                        $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' + link + '">' 
+                            + '<img src='
+                            + fig_link
+                            + ' class="center"></a></div>');
+                        
+                    });
+                });
+        }
+
+
+    
+
+        write_books();
+        write_grid_books();
+
+        function star(ISBN){
+            var db = firebase.database();
+            var book = db.ref("/books/" + ISBN);
+            book.once('value').then(function (snapshot) {
+                var stars = snapshot.val().stars + 1;
+                book.update({stars:stars})
+                document.getElementById('star-' + ISBN).textContent = stars;
+            });
+        };
+        
+       
+        function changeData() {
+            var title = document.getElementById("my_text").value;
+            book.set({
+                title: title,
+                stars: 1,
+            });
+        }
+
+        var animateButton = function (e) {
+
+                e.preventDefault;
+                //reset animation
+                e.target.classList.remove('animate');
+
+                e.target.classList.add('animate');
+                setTimeout(function () {
+                    e.target.classList.remove('animate');
+                }, 700);
+            };
+
+            var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+            for (var i = 0; i < bubblyButtons.length; i++) {
+                bubblyButtons[i].addEventListener('click', animateButton, false);
+            }
+    </script>
+</body>
+
+</html>.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
     <!-- jQuery is required -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- UIkit JS -->
