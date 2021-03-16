@@ -1,43 +1,61 @@
+html[lang="ja"] {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
 .table-sticky {
-  position: -webkit-sticky; /* Safari */
+  position: -webkit-sticky;
+  /* Safari */
   position: sticky;
   top: 0;
 }
 
 
 .nav-sticky {
-  position: -webkit-sticky; /* Safari */
+  position: -webkit-sticky;
+  /* Safari */
   position: sticky;
   top: 0;
 }
 
 .div-sticky {
-  position: -webkit-sticky; /* Safari */
+  position: -webkit-sticky;
+  /* Safari */
   position: sticky;
   top: 0;
 }
 
-body{
-    color: black;
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: black;
 }
 
-h1{
-    font-weight: 400;
+h1 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
 }
 
-h2{
-    font-weight: 500;
-    color: black;
+h2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: black;
 }
 
-body{ 
-    font-family: "Noto Sans Japanese";
-    font-weight: 200;
+
+h3 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: black;
 }
 
-li{
-    font-weight: 200;
-    padding: 1%;
+span {
+  font-family: 'Noto Sans JP',
+  sans-serif;
+}
+
+li {
+  font-weight: 200;
+  padding: 1%;
 }
 
 
@@ -45,19 +63,19 @@ table {
   counter-reset: rowCount;
 }
 
-table > tbody > tr {
+table>tbody>tr {
   counter-increment: rowCount;
 }
 
-table > tbody > tr > td:first-child::before {
+table>tbody>tr>td:first-child::before {
   content: counter(rowCount);
 }
 
-.star{
+.star {
   height: 2.0em;
   width: 2.0em;
   display: inline-block;
-  background-color:#ff0081;
+  background-color: #ff0081;
   -webkit-mask-image: url(image/star.svg);
   mask-image: url(image/star.svg);
   mask-size: 2.0em 2.0em;
@@ -67,9 +85,9 @@ table > tbody > tr > td:first-child::before {
   opacity: 0.70;
   cursor: pointer;
 }
-.star:hover
-{
-    opacity:1.0;
+
+.star:hover {
+  opacity: 1.0;
 }
 
 .center {
