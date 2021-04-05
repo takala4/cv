@@ -4,4 +4,4 @@
 
 [Home](index.md)
 [Coffee](coffee.md)
-[Onsen](Onsen.md)
+[Onsen](onsen.md)
