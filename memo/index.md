@@ -3,6 +3,6 @@
 
 # Home
 
-* [Coffee](coffee.md)：コーヒー豆の一覧
-* [Onsen](onsen.md)：温泉の一覧
+* [Coffee](coffee.md)
+* [Onsen](onsen.md)
 
