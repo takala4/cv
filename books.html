@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
     <!-- jQuery is required -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- paginathing.js -->
+    <script type="text/javascript" src="js/paginathing.min.js"></script>
+    <script type="text/javascript" src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
     <!-- UIkit JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/js/uikit-icons.min.js"></script>
@@ -24,7 +27,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-analytics.js"></script>
-
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -50,13 +52,42 @@
 
         <h1>積読リスト</h1>
         <p>
-            （たぶん）電子書籍，漫画，小説を除く積読の一覧．グリッド形式の表示は試行中です．ページ下部にリスト形式のものがあります．        
+            （たぶん）電子書籍，漫画，小説を除く積読の一覧．グリッド形式の表示は試行中です．ページ下部にリスト形式のものがあります．
         </p>
 
 
         <div class="uk-margin">
             <div id="grid_table" class="grid" style="--cols-xl: 6;">
                 <!-- ここにgrid -->
+                <!-- <div class="list-group-item"> Your Item 1</div>
+                <div class="list-group-item"> Your Item 2</div>
+                <div class="list-group-item"> Your Item 3</div>
+                <div class="list-group-item"> Your Item 4</div>
+                <div class="list-group-item"> Your Item 5</div>
+                <div class="list-group-item"> Your Item 6</div>
+                <div class="list-group-item"> Your Item 7</div>
+                <div class="list-group-item"> Your Item 8</div>
+                <div class="list-group-item"> Your Item 9</div>
+                <div class="list-group-item"> Your Item 10</div>
+                <div class="list-group-item"> Your Item 11</div>
+                <div class="list-group-item"> Your Item 12</div>
+                <div class="list-group-item"> Your Item 13</div>
+                <div class="list-group-item"> Your Item 14</div>
+                <div class="list-group-item"> Your Item 15</div>
+                <div class="list-group-item"> Your Item 16</div>
+                <div class="list-group-item"> Your Item 17</div>
+                <div class="list-group-item"> Your Item 18</div>
+                <div class="list-group-item"> Your Item 19</div>
+                <div class="list-group-item"> Your Item 20</div>
+                <div class="list-group-item"> Your Item 21</div>
+                <div class="list-group-item"> Your Item 22</div>
+                <div class="list-group-item"> Your Item 23</div>
+                <div class="list-group-item"> Your Item 24</div>
+                <div class="list-group-item"> Your Item 25</div>
+                <div class="list-group-item"> Your Item 26</div>
+                <div class="list-group-item"> Your Item 27</div>
+                <div class="list-group-item"> Your Item 28</div>
+                <div class="list-group-item"> Your Item 29</div> -->
             </div>
         </div>
         <p>
@@ -98,11 +129,12 @@
                         var author = childSnapshot.child('author').val();
                         var link = childSnapshot.child('amazon').val();
                         var title = childSnapshot.child('title').val();
-                        $detpos.prepend('<tr><td></td><td><a href="' + link + '">' 
-                            + title +　'</a></td><td><div id=star-' + ISBN 
-                            + ' class="uk-text-center uk-padding-remove">' + stars + '</div><div id=' + ISBN 
-                            + ' onclick="star(this.id)"  class="star uk-text-center">' 
-                            + '</div></td></tr>');
+                        $detpos.prepend('<tr><td></td><td><a href="' + link + '">' +
+                            title + '</a></td><td><div id=star-' + ISBN +
+                            ' class="uk-text-center uk-padding-remove">' + stars + '</div><div id=' +
+                            ISBN +
+                            ' onclick="star(this.id)"  class="star uk-text-center">' +
+                            '</div></td></tr>');
                     });
                 });
         }
@@ -124,32 +156,103 @@
                         var title = childSnapshot.child('title').val();
                         // $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' + link + '">' 
                         //     + title +　'</a></div>');
-                        $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' + link + '">' 
-                            + '<img src='
-                            + fig_link
-                            + ' height="130" width="90" class="center"></a></div>');
-                        
+                        $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' +
+                            link + '">' +
+                            '<img src=' +
+                            fig_link +
+                            ' height="130" width="90" class="center"></a></div>');
+
                     });
                 });
         }
 
+        function get_snapshot(){
+             var $detpos = $("#grid_table");
 
-    
+            var db = firebase.database();
+            var books = db.ref("/books").orderByChild('stars');
 
-        write_books();
-        write_grid_books();
+            var data_list = [];
 
-        function star(ISBN){
+            books.once("value")
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var ISBN = childSnapshot.key;
+                        var stars = childSnapshot.child('stars').val();
+                        var author = childSnapshot.child('author').val();
+                        var link = childSnapshot.child('amazon').val();
+                        var fig_link = childSnapshot.child('amazon_fig').val();
+                        var title = childSnapshot.child('title').val();
+                        var data_item = {
+                            'ISBN' : ISBN,
+                            'stars' : stars,
+                            'author' : author,
+                            'link' : link,
+                            'fig_link' : fig_link,
+                            'title' : title,
+                        };
+                        data_list.push(data_item);
+                    });
+                });
+                return data_list
+        }
+
+        sp_data = get_snapshot();
+        console.log(sp_data);
+
+        function write_page(sp_slice_data){
+            console.log(sp_slice_data);
+            sp_slice_data.forEach(function(item, index, array){
+                var $detpos = $("#grid_table");
+                $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' +
+                            item.link + '">' +
+                            '<img src=' +
+                            item.fig_link +
+                            ' height="130" width="90" class="center"></a></div>');
+            });
+        }
+
+        function page_nation() {
+            $('#grid_table').pagination({
+                pageSize: 1,
+                dataSource: [0,1,2,3,4,5,6,7,8,9],
+                totalNumber: 100,
+                locator: 'items',
+                showPageNumbers: false,
+                showNavigator: true,
+                callback: function (data, pagination) {
+                    // write_grid_books();
+                    var start_index = 10 * data; 
+                    var end_index = 10 * data + 10;
+                    write_page(sp_data.slice([start_index, end_index]));
+                    // var $detpos = $("#grid_table");
+                    // $detpos.prepend(template(data));
+                }
+            });
+        }
+
+        function template(data) {
+            return '<div class="list-group-item"> Your Item' + data + '</div>'
+        }
+
+
+        // write_books();
+        // write_grid_books();
+        page_nation();
+
+        function star(ISBN) {
             var db = firebase.database();
             var book = db.ref("/books/" + ISBN);
             book.once('value').then(function (snapshot) {
                 var stars = snapshot.val().stars + 1;
-                book.update({stars:stars})
+                book.update({
+                    stars: stars
+                })
                 document.getElementById('star-' + ISBN).textContent = stars;
             });
         };
-        
-       
+
+
         function changeData() {
             var title = document.getElementById("my_text").value;
             book.set({
@@ -160,21 +263,21 @@
 
         var animateButton = function (e) {
 
-                e.preventDefault;
-                //reset animation
+            e.preventDefault;
+            //reset animation
+            e.target.classList.remove('animate');
+
+            e.target.classList.add('animate');
+            setTimeout(function () {
                 e.target.classList.remove('animate');
+            }, 700);
+        };
 
-                e.target.classList.add('animate');
-                setTimeout(function () {
-                    e.target.classList.remove('animate');
-                }, 700);
-            };
+        var bubblyButtons = document.getElementsByClassName("bubbly-button");
 
-            var bubblyButtons = document.getElementsByClassName("bubbly-button");
-
-            for (var i = 0; i < bubblyButtons.length; i++) {
-                bubblyButtons[i].addEventListener('click', animateButton, false);
-            }
+        for (var i = 0; i < bubblyButtons.length; i++) {
+            bubblyButtons[i].addEventListener('click', animateButton, false);
+        }
     </script>
 </body>
 
