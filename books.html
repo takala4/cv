@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>積読リスト</title>
+    <title>本棚</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.25/css/uikit.min.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./pagination.css" />
     <link rel="stylesheet" href="./iota.css" />
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
     <!-- jQuery is required -->
@@ -56,38 +57,9 @@
         </p>
 
 
-        <div class="uk-margin">
+        <div id="grid_table_parent" class="uk-margin">
             <div id="grid_table" class="grid" style="--cols-xl: 6;">
                 <!-- ここにgrid -->
-                <!-- <div class="list-group-item"> Your Item 1</div>
-                <div class="list-group-item"> Your Item 2</div>
-                <div class="list-group-item"> Your Item 3</div>
-                <div class="list-group-item"> Your Item 4</div>
-                <div class="list-group-item"> Your Item 5</div>
-                <div class="list-group-item"> Your Item 6</div>
-                <div class="list-group-item"> Your Item 7</div>
-                <div class="list-group-item"> Your Item 8</div>
-                <div class="list-group-item"> Your Item 9</div>
-                <div class="list-group-item"> Your Item 10</div>
-                <div class="list-group-item"> Your Item 11</div>
-                <div class="list-group-item"> Your Item 12</div>
-                <div class="list-group-item"> Your Item 13</div>
-                <div class="list-group-item"> Your Item 14</div>
-                <div class="list-group-item"> Your Item 15</div>
-                <div class="list-group-item"> Your Item 16</div>
-                <div class="list-group-item"> Your Item 17</div>
-                <div class="list-group-item"> Your Item 18</div>
-                <div class="list-group-item"> Your Item 19</div>
-                <div class="list-group-item"> Your Item 20</div>
-                <div class="list-group-item"> Your Item 21</div>
-                <div class="list-group-item"> Your Item 22</div>
-                <div class="list-group-item"> Your Item 23</div>
-                <div class="list-group-item"> Your Item 24</div>
-                <div class="list-group-item"> Your Item 25</div>
-                <div class="list-group-item"> Your Item 26</div>
-                <div class="list-group-item"> Your Item 27</div>
-                <div class="list-group-item"> Your Item 28</div>
-                <div class="list-group-item"> Your Item 29</div> -->
             </div>
         </div>
         <p>
@@ -167,8 +139,6 @@
         }
 
         function get_snapshot(){
-             var $detpos = $("#grid_table");
-
             var db = firebase.database();
             var books = db.ref("/books").orderByChild('stars');
 
@@ -198,10 +168,12 @@
         }
 
         sp_data = get_snapshot();
-        console.log(sp_data);
+        ;
 
         function write_page(sp_slice_data){
-            console.log(sp_slice_data);
+            
+            $("#grid_table").empty();
+
             sp_slice_data.forEach(function(item, index, array){
                 var $detpos = $("#grid_table");
                 $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' +
@@ -213,26 +185,21 @@
         }
 
         function page_nation() {
-            $('#grid_table').pagination({
+            $('#grid_table_parent').pagination({
                 pageSize: 1,
-                dataSource: [0,1,2,3,4,5,6,7,8,9],
+                dataSource: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
                 totalNumber: 100,
                 locator: 'items',
                 showPageNumbers: false,
                 showNavigator: true,
                 callback: function (data, pagination) {
-                    // write_grid_books();
-                    var start_index = 10 * data; 
-                    var end_index = 10 * data + 10;
-                    write_page(sp_data.slice([start_index, end_index]));
-                    // var $detpos = $("#grid_table");
-                    // $detpos.prepend(template(data));
+                    
+                    console.log(data[0])
+                    var start_index = 20 * data[0]; 
+                    var end_index = 20 * data[0] + 20;
+                    write_page(sp_data.slice(start_index, end_index));
                 }
             });
-        }
-
-        function template(data) {
-            return '<div class="list-group-item"> Your Item' + data + '</div>'
         }
 
 
