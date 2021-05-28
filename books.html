@@ -51,9 +51,9 @@
 <body>
     <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
 
-        <h1>積読リスト</h1>
+        <h1>本棚</h1>
         <p>
-            （たぶん）電子書籍，漫画，小説を除く積読の一覧．グリッド形式の表示は試行中です．ページ下部にリスト形式のものがあります．
+            （たぶん）電子書籍，漫画，小説を除く本棚の一覧．グリッド形式の表示は試行中です．
         </p>
 
 
@@ -62,10 +62,10 @@
                 <!-- ここにgrid -->
             </div>
         </div>
-        <p>
+        <!-- <p>
             「さっさと読め」と思う書籍にSTARを頂けると良いプレッシャーになります．
-        </p>
-        <table class="uk-table uk-table-justify uk-table-divider uk-vertical-align-middle uk-table-middle">
+        </p> -->
+        <!-- <table class="uk-table uk-table-justify uk-table-divider uk-vertical-align-middle uk-table-middle">
             <thead>
                 <tr>
                     <th class="uk-width-small">#</th>
@@ -74,13 +74,12 @@
                 </tr>
             </thead>
             <tbody>
-                <!--ここにlist-->
             </tbody>
-        </table>
+        </table> -->
 
         <h3>このページについて</h3>
         <ul>
-            <li>個人的な興味・関心によるものです．このページでは特定の書籍の批評を目的としていません．</li>
+            <!-- <li>個人的な興味・関心によるものです．このページでは特定の書籍の批評を目的としていません．</li> -->
             <li>読了後の書評は読書メーターに投稿しています．</li>
             <li>書籍にはAmazon.co.jpアソシエイト・プログラムによるリンクが貼られています．</li>
         </ul>
@@ -138,7 +137,8 @@
                 });
         }
 
-        function get_snapshot(){
+
+        function get_snapshot() {
             var db = firebase.database();
             var books = db.ref("/books").orderByChild('stars');
 
@@ -154,58 +154,87 @@
                         var fig_link = childSnapshot.child('amazon_fig').val();
                         var title = childSnapshot.child('title').val();
                         var data_item = {
-                            'ISBN' : ISBN,
-                            'stars' : stars,
-                            'author' : author,
-                            'link' : link,
-                            'fig_link' : fig_link,
-                            'title' : title,
+                            'ISBN': ISBN,
+                            'stars': stars,
+                            'author': author,
+                            'link': link,
+                            'fig_link': fig_link,
+                            'title': title,
                         };
                         data_list.push(data_item);
                     });
                 });
-                return data_list
+            sp_data = data_list;
+            //    return data_list;
         }
 
-        sp_data = get_snapshot();
-        ;
 
-        function write_page(sp_slice_data){
-            
-            $("#grid_table").empty();
-
-            sp_slice_data.forEach(function(item, index, array){
+        function write_page(sp_slice_data, flag) {
+            if (flag == false) {
+                $("#grid_table").empty();
+            }
+            sp_slice_data.forEach(function (item, index, array) {
                 var $detpos = $("#grid_table");
                 $detpos.prepend('<div class="uk-card uk-card-default uk-card-body"><a href="' +
-                            item.link + '">' +
-                            '<img src=' +
-                            item.fig_link +
-                            ' height="130" width="90" class="center"></a></div>');
+                    item.link + '">' +
+                    '<img src=' +
+                    item.fig_link +
+                    ' height="130" width="90" class="center"></a></div>');
             });
         }
 
-        function page_nation() {
+        function page_nation(sp_data) {
+            var num_contents = 20;
+            var max_page = Math.ceil(sp_data.length / num_contents);
+            console.log(max_page);
+
             $('#grid_table_parent').pagination({
                 pageSize: 1,
-                dataSource: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+                dataSource: function (done) {
+                    var result = [];
+                    for (var i = 0; i < max_page; i++) {
+                        result.push(i);
+                    }
+                    done(result);
+                },
                 totalNumber: 100,
-                locator: 'items',
-                showPageNumbers: false,
-                showNavigator: true,
+                // locator: 'items',
+                // showPageNumbers: false,
+                // showNavigator: true,
                 callback: function (data, pagination) {
-                    
-                    console.log(data[0])
-                    var start_index = 20 * data[0]; 
-                    var end_index = 20 * data[0] + 20;
-                    write_page(sp_data.slice(start_index, end_index));
+                    var start_index = num_contents * data[0];
+                    var end_index = num_contents * (data[0] + 1);
+                    write_page(sp_data.slice(start_index, end_index), false);
                 }
             });
         }
 
+        var sp_data;
+        // $(function () {
+        //     $.when(
+        //         // 先に実行したい処理
+        //         console.log('処理1'),
+        //         get_snapshot()
+        //     ).done(function () {
+        //         // 後に実行したい処理
+        //         console.log(sp_data);
+        //         write_page(sp_data.slice(1,10), true);
+        //         page_nation(sp_data);
+        //     }).fail(function () {
+        //         // エラーが発生したときの処理
+        //     });
+        // });
 
         // write_books();
         // write_grid_books();
-        page_nation();
+
+        get_snapshot();
+        setTimeout(function () {
+            page_nation(sp_data);
+        }, 1000);
+
+        // console.log(sp_data);
+
 
         function star(ISBN) {
             var db = firebase.database();
