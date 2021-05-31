@@ -1,6 +1,10 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+
+
 html[lang="ja"] {
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
+
 
 .table-sticky {
   position: -webkit-sticky;
@@ -26,25 +30,25 @@ html[lang="ja"] {
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: black;
 }
 
 h1 {
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 h2 {
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: black;
 }
 
 
 h3 {
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: black;
 }
 
@@ -54,7 +58,7 @@ span {
 }
 
 li {
-  font-weight: 200;
+  font-weight: 300;
   padding: 1%;
 }
 
