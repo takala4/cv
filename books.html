@@ -210,28 +210,14 @@
         }
 
         var sp_data;
-        // $(function () {
-        //     $.when(
-        //         // 先に実行したい処理
-        //         console.log('処理1'),
-        //         get_snapshot()
-        //     ).done(function () {
-        //         // 後に実行したい処理
-        //         console.log(sp_data);
-        //         write_page(sp_data.slice(1,10), true);
-        //         page_nation(sp_data);
-        //     }).fail(function () {
-        //         // エラーが発生したときの処理
-        //     });
-        // });
-
         // write_books();
         // write_grid_books();
 
         get_snapshot();
+        // Need to fix !!!-----
         setTimeout(function () {
             page_nation(sp_data);
-        }, 1000);
+        }, 1500); 
 
         // console.log(sp_data);
 
