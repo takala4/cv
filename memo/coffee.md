@@ -41,4 +41,8 @@
 | 33 | 2021/06/25    |  [生豆本舗](https://www.namamame.jp/)    | マイ農園 カチモール(ベトナム) ||
 | 34 | 2021/07/19    |  [珈琲まめ坊](https://www.mamebou.com/)    | 季節のブレンド(銀河) ||
 | 35 | 2021/07/19    |  [珈琲まめ坊](https://www.mamebou.com/)    | タンザニア ||
+| 36 | 2021/07/20    | [HAMACOFFEE](https://hama-coffee.ocnk.net/)  | AAマサイ(ケニア) ||
+| 37 | 2021/07/20    | [HAMACOFFEE](https://hama-coffee.ocnk.net/)  | シダモG4(エチオピア) ||
+| 38 | 2021/07/20    | [HAMACOFFEE](https://hama-coffee.ocnk.net/)  | イルガチェフェ・ベレカG1(エチオピア) ||
+
 
