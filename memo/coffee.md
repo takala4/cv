@@ -44,5 +44,8 @@
 | 36 | 2021/07/20    | [HAMACOFFEE](https://hama-coffee.ocnk.net/)  | AAマサイ(ケニア) ||
 | 37 | 2021/07/20    | [HAMACOFFEE](https://hama-coffee.ocnk.net/)  | シダモG4(エチオピア) ||
 | 38 | 2021/07/20    | [HAMACOFFEE](https://hama-coffee.ocnk.net/)  | イルガチェフェ・ベレカG1(エチオピア) ||
-
+| 39 | 2021/07/31    | [鷲コーヒー](https://www.washi.net/)  | ルービーマウンテン/アラビカ・カツーラ (ベトナム) ||
+| 40 | 2021/07/31    | [鷲コーヒー](https://www.washi.net/)  | ジャワ アラビカ パンコール農園/USDA,S-Lini(S795),Kartika (インドネシア)||
+| 41 | 2021/07/31    | [鷲コーヒー](https://www.washi.net/)  | KPA コンゴプレミアムA　ティピカ種・ブルボン種 (パプアニューギニア)||
+| 42 | 2021/07/31    | [鷲コーヒー](https://www.washi.net/)  | AA スノートップ エーデルワイス農園/ブルボン種・SL28種・SL34種・TACRI種・ケント種 (タンザニア)　||
 
