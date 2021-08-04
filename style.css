@@ -1,11 +1,8 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
 
 
-
 html[lang="ja"] {
-  /* font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; */
-  font-family: "Source Han Code JP";
-  src: url("./font/SourceHanCodeJP.ttc") format("ttc");
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 
 
@@ -32,33 +29,33 @@ html[lang="ja"] {
 }
 
 body {
-  font-family: "Source Han Code JP Regular";
+  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
   color: black;
 }
 
 h1 {
-  font-family: 'Source Han Code JP Medium',
-  sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
 }
 
 h2 {
-  font-family: 'Source Han Code JP Medium',
-  sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
   color: black;
 }
 
 
 h3 {
-    font-family: 'Source Han Code JP Medium',
-    sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
   color: black;
 }
 
-
+span {
+  font-family: 'Noto Sans JP',
+  sans-serif;
+}
 
 li {
   font-weight: 300;
