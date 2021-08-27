@@ -52,10 +52,7 @@
     <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
 
         <h1>本棚</h1>
-        <p>
-            （たぶん）電子書籍，漫画，小説を除く本棚の一覧．グリッド形式の表示は試行中です．
-        </p>
-
+        <p>蔵書の一覧．いろいろ試行中です．</p>
 
         <div id="grid_table_parent" class="uk-margin">
             <div id="grid_table" class="grid" style="--cols-xl: 6;">
@@ -211,15 +208,7 @@
 
         var sp_data;
         // write_books();
-        // write_grid_books();
-
-        get_snapshot();
-        // Need to fix !!!-----
-        setTimeout(function () {
-            page_nation(sp_data);
-        }, 1500); 
-
-        // console.log(sp_data);
+        write_grid_books();
 
 
         function star(ISBN) {
