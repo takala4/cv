@@ -57,4 +57,5 @@
 | 49 | 2021/08/26    | [鷲コーヒー](https://www.washi.net/)  | トラジャ　ランテカルア　スロトコ農園 (インドネシア)||
 | 50 | 2021/08/26    | [鷲コーヒー](https://www.washi.net/)  | ブラジルサントスNO２・１８ (ブラジル)||
 | 51 | 2021/08/26    | [鷲コーヒー](https://www.washi.net/)  | イエメン モカ マタリ No9 (イエメン)　||
-| 47 | 2021/09/06    |  [IsKoffee](https://iskoffee.com/)    | サンタエレナ農園 (エル サルバドル) | |
+| 52 | 2021/09/06    |  [IsKoffee](https://iskoffee.com/)    | サンタエレナ農園 (エル サルバドル) 　||
+| 53 | 2021/09/11    |  [うつわCAFE GuruGuru](https://www.facebook.com/guru.akiu)    | モカ・マタリ　||
