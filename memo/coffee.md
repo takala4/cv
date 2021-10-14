@@ -4,6 +4,8 @@
 
 # Coffee
 
+## コーヒー豆のログ
+
 | #   | 日付 | 店舗 | 品名等 |メモ|
 | :-: | :-:  | :-: | :-- |:--| 
 | 1  | 2021/03/16    |  [不忘園FTC](https://fuboen.com/)   | さくらブルボン(ブラジル)   | |
@@ -66,4 +68,30 @@
 | 58 | 2021/09/26    |  [中尾珈琲](http://nakao-shop.jp/02.html)    | ハニー (コスタリカ・カンデリージャ農園) | 〇 |
 | 59 | 2021/09/26    |  [中尾珈琲](http://nakao-shop.jp/02.html)    | パナマ ||
 | 60 | 2021/10/01    |  [不忘園FTC](https://fuboen.com/)   | ミルキーマンデリン ||
+| 61 | 2021/10/14    |  [焙煎工房がらしゃ](https://www.google.com/search?q=焙煎工房がらしゃ)    | サヴァンナ・ブレンド ||
+| 62 | 2021/10/14    |  [焙煎工房がらしゃ](https://www.google.com/search?q=焙煎工房がらしゃ)    |  ヴィジャサルチ (グアテマラ) ||
+| 63 | 2021/10/14    |  [焙煎工房がらしゃ](https://www.google.com/search?q=焙煎工房がらしゃ)    |  ケニアAA SL28 and SL34 (ケニア) ||
 
+
+## 愛用品
+
+
+### カリタ コーヒーミル ネクストG 電動ミル
+
+<div class='amazon_link' data-asin='B01MQG0RZ2'></div>
+
+静電除去装置がついているため，粉が散らばらない．
+
+
+### ジャパンポーレックス コーヒーミル
+
+<div class='amazon_link' data-asin='B082L26FLX'></div>
+
+鹿児島県に本社を置くセラミック製品メーカー，ジャパンポーレックス社の手動コーヒーミル．豆を挽く刃部分がセラミックでできており，丸洗いが可能．金属臭も全くしない．無駄のないスタイリッシュなデザインであるが，粒度を16段階調整できる機能性も備える．ジャパンポーレックス社の[ホームーページ](http://www.porlex.co.jp/lineup/coffee.html)に製品のこだわりが丁寧に紹介されている．
+
+
+
+<!-- amazon link creater -->
+<script type="application/javascript">
+   CreateAmazonLink();
+</script>
