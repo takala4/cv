@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap');
-
-
-html[lang="ja"] {
-	font-family: 'Zen Kaku Gothic New', sans-serif;
-}
 
 
 
@@ -29,41 +23,37 @@ html[lang="ja"] {
   top: 0;
 }
 
-body {
-	font-family: 'Zen Kaku Gothic New';
-	font-size: large !important;
-  font-weight: 400;
+html{
+  font-family: "Roboto", "Noto Sans JP", Arial;
+  font-size: 16px;
+  font-weight: 0;
   color: black;
+}
+
+body {
+  margin: 1.0em;
 }
 
 h1 {
-  font-family: 'Zen Kaku Gothic New';
-  font-weight: 400;
+  font-weight: bold;
 }
 
 h2 {
-  font-family: 'Zen Kaku Gothic New';
-  font-weight: 400;
-  color: black;
+  font-weight: bold;
 }
 
 
 h3 {
-  font-family: 'Zen Kaku Gothic New';
-  font-weight: 400;
-  color: black;
+  font-weight: bold;
 }
 
 span {
-  font-family: 'Zen Kaku Gothic New';
-  font-weight: 400;
+ 	font-size:16px;
 }
 
 li {
-  font-weight: 400;
   padding: 1%;
 }
-
 
 table {
   counter-reset: rowCount;

@@ -1,0 +1,162 @@
+:root {
+    color-scheme: light dark;
+    --light: #fff;
+    --lesslight: #efefef;
+    --dark: #404040;
+    --moredark: #000;
+    --link: royalblue;
+    border-top: 5px solid var(--dark);
+    line-height: 1.5em;
+    font-family:  "Noto Sans JP", "Roboto", Arial;
+    font-size: 16px;
+}
+
+html {
+  visibility: hidden;
+}
+html.wf-active, html.loading-delay {
+  visibility: visible;
+}
+
+* {
+    box-sizing: border-box;
+    color: var(--dark);
+}
+
+h1 {
+    line-height: 1em;
+}
+
+button, input {
+    font-size: 1em; /* Override browser default font shrinking*/
+}
+
+input {
+    border: 1px solid var(--dark);
+    background-color: var(--lesslight);
+    border-radius: .25em;
+    padding: .5em;
+}
+
+pre {
+    background-color: var(--lesslight);
+    margin: 0.5em 0 0.5em 0;
+    padding: 0.5em;
+    overflow: auto;
+}
+
+code {
+    background-color: var(--lesslight);
+}
+
+body {
+    background-color: var(--light);
+    margin: 1px;
+    max-width: 1200px;
+    padding: 20px 20px 20px 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    outline: none;
+}
+
+a:hover {
+    text-decoration-color: var(--link);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button, .button, input[type=submit] {
+    display: inline-block;
+    background-color: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: .5em;
+    border-radius: .25em;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover, .button:hover, input[type=submit]:hover {
+    color: var(--lesslight);
+    background-color: var(--moredark);
+}
+
+/* Add a margin between side-by-side buttons */
+button + button, .button + .button, input[type=submit] + input[type=submit] {
+    margin-left: 1em;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.bordered {
+    border: 3px solid;
+}
+
+.home {
+    display: inline-block;
+    background-color: var(--dark);
+    color: var(--light);
+    margin-top: 20px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Desktop sizes */
+@media (min-width: 600px) {
+    ol.twocol {
+        column-count: 2;
+    }
+    
+    .row {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        width: 100%;
+    }
+
+    /* Make everything in a row a column */
+    .row > * {
+        display: block;
+        flex: 1 1 auto;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .row > *:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+
+
+/* Printing */
+@media print {
+    .home {
+        display: none;
+    }
+}
+
+li {
+  padding: 0.3em;
+}
+
+
+/* https://background-svg.com/ptn/ptns/asanoha.html */
+  .asanoha-pattern {
+     width: device-width;
+  height: 6.0em;
+    background:url("data:image/svg+xml;charset=utf-8,%3csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='70' height='40' viewBox='0 0 140 80' preserveAspectRatio='none'%3e%3cpath fill='%23ffffff' d='M4 1h42l21 36zM3 3l63 36h-42zM1 4l21 36-21 36zM3 77l21-36h42zM46 79h-42l63-36zM69 44v41h-24zM95 85h-24v-41zM73 43l63 36h-42zM74 41h42l21 36zM118 40l21-36v72zM137 3l-21 36h-42zM94 1h42l-63 36zM71 36v-41h24zM45-5h24v41z'/%3e%3cpath fill='none' stroke='%23000000' stroke-width='.8' d='M47 0h-47v80h47l46-80h47v80h-47zM117 40h-94l-23 40l140-80-23 40 23 40-140-80 23 40M70-5v90'/%3e%3c/svg%3e");
+  }
