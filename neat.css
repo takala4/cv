@@ -27,6 +27,24 @@ h1 {
     line-height: 1em;
 }
 
+h2 {
+  position: relative;
+  padding: 0.25em 1em;
+  border-bottom: solid 2px black; /* Retains the bottom border */
+}
+
+h2:before {
+  content: '';
+  position: absolute;
+  top: 7px; /* Starts from the top of h2 */
+  bottom: -9px; /* Extends to the bottom of h2 */
+  left: 7px; /* Aligns with the left side of h2 */
+  width: 2px; /* Thickness of the vertical line */
+  background-color: black; /* Color of the vertical line */
+}
+
+
+
 button, input {
     font-size: 1em; /* Override browser default font shrinking*/
 }
