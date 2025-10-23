@@ -29,7 +29,7 @@ h1 {
 
 h2 {
   position: relative;
-  padding: 0.25em 1em;
+  padding: 0.40em 0.80em;
   border-bottom: solid 2px black; /* Retains the bottom border */
 }
 
@@ -43,6 +43,9 @@ h2:before {
   background-color: black; /* Color of the vertical line */
 }
 
+h3 {
+   padding: 0.40em 0.80em;
+}
 
 
 button, input {
