@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Vitae — Takara Sakai</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --ink: #111111;
+      --soft: #111111;
+      --muted: #1a1a1a;
+      --line: #d9dce0;
+      --accent: #111111;
+      --accent-soft: #ececee;
+      --page: 210mm;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI",
+        "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      background: #eceff1;
+      font-feature-settings: "kern" 1, "liga" 1;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Screen-only helper banner */
+    .toolbar {
+      max-width: var(--page);
+      margin: 18px auto 0;
+      padding: 12px 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--soft);
+    }
+    .toolbar kbd {
+      background: #f5f7fa; border: 1px solid #cbd2d9; border-bottom-width: 2px;
+      border-radius: 4px; padding: 1px 6px; font-size: 12px; color: var(--ink);
+    }
+
+    .page {
+      max-width: var(--page);
+      margin: 18px auto;
+      padding: 26mm 22mm;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 6px 30px rgba(31, 41, 51, .10);
+    }
+
+    /* ---- Header ---- */
+    header {
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 8px;
+    }
+    .name {
+      font-family: "Space Grotesk", "Inter", sans-serif;
+      font-size: 20pt;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--ink);
+    }
+    .headline {
+      color: var(--ink);
+      font-size: 11pt;
+      font-weight: 500;
+      letter-spacing: .1px;
+      margin: 7px 0 14px;
+    }
+    .contact {
+      font-size: 10pt;
+      color: var(--soft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 0;
+    }
+    .contact > span { display: inline-flex; align-items: center; }
+    .contact > span:not(:last-child)::after {
+      content: "";
+      width: 4px; height: 4px;
+      margin: 0 12px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: .6;
+    }
+    .contact a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .contact a:hover { text-decoration: underline; }
+
+    /* ---- Sections ---- */
+    section { margin-top: 30px; }
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Space Grotesk", "Inter", sans-serif;
+      font-size: 12pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 0 14px;
+    }
+    h2::before {
+      content: "";
+      width: 14px; height: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      flex: none;
+    }
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* two-column rows (text + dates) */
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 20px;
+      padding: 7px 0;
+    }
+    .row + .row { border-top: 1px solid var(--line); }
+    .row .what { font-weight: 500; }
+    .row .when {
+      color: var(--muted);
+      font-size: 10pt;
+      font-weight: 600;
+      letter-spacing: .3px;
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 1px;
+    }
+
+    ul.chips {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+    ul.chips li {
+      background: var(--accent-soft);
+      color: var(--ink);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 10pt;
+      font-weight: 500;
+    }
+
+    /* Numbered publication / talk lists with hanging indent */
+    ol.list { margin: 0; padding: 0; list-style: none; counter-reset: item; }
+    ol.list > li {
+      position: relative;
+      padding-left: 30px;
+      margin: 0;
+      padding-top: 11px;
+      padding-bottom: 11px;
+      counter-increment: item;
+    }
+    ol.list > li + li { border-top: 1px solid var(--line); }
+    ol.list > li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      font-size: 8pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .venue {
+      font-family: "Spectral", Georgia, serif;
+      font-style: italic;
+      font-size: 11pt;
+      color: var(--ink);
+    }
+    .meta { display: block; color: var(--muted); font-size: 10pt; margin-top: 2px; }
+    .me { font-weight: 700; color: var(--ink); }
+    a.doi {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 10pt;
+      font-weight: 500;
+    }
+    a.doi:hover { text-decoration: underline; }
+    .tag { color: var(--muted); font-style: normal; font-size: 10pt; }
+
+    .updated {
+      margin-top: 30px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10pt;
+      text-align: right;
+    }
+
+    @media print {
+      body { background: #fff; font-size: 10.5pt; line-height: 1.42; }
+      .toolbar { display: none; }
+      .page { box-shadow: none; margin: 0 auto; padding: 0; max-width: none; border-radius: 0; }
+      @page { size: A4; margin: 15mm 15mm; }
+      section { break-inside: avoid; margin-top: 22px; }
+      h2 { break-after: avoid; }
+      ol.list > li, .row { break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toolbar">
+    印刷用CVです。ブラウザで <kbd>Ctrl</kbd>+<kbd>P</kbd> →「送信先: PDFに保存」でPDF化できます（この案内枠は印刷されません）。
+  </div>
+
+  <div class="page">
+    <header>
+      <p class="name">Takara Sakai</p>
+      <p class="headline">Specially Appointed Assistant Professor · School of Environment and Society ·
+        Institute of Science Tokyo (Takayama Lab)</p>
+      <div class="contact">
+        <span><a href="mailto:sakai.t.dcad@m.isct.ac.jp">sakai.t.dcad@m.isct.ac.jp</a></span>
+        <span>Room 410, West Bldg. 6, Ookayama Campus, Meguro-ku, Tokyo 152-8550, Japan</span>
+        <span><a href="https://researchmap.jp/treasure">researchmap</a></span>
+        <span><a href="https://scholar.google.co.jp/citations?hl=en&user=0mXKGE4AAAAJ">Google Scholar</a></span>
+        <span><a href="https://github.com/takala4/">GitHub</a></span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Research Interests</h2>
+      <ul class="chips">
+        <li>Transportation and Traffic Theory</li>
+        <li>Regional Science and Urban Economics</li>
+        <li>Optimization, Control &amp; Algorithms</li>
+        <li>Game Theory &amp; Mechanism Design</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Academic Appointments</h2>
+      <div class="row">
+        <div class="what">Specially Appointed Assistant Professor, School of Environment and Society,
+          Institute of Science Tokyo</div>
+        <div class="when">Oct. 2024 – present</div>
+      </div>
+      <div class="row">
+        <div class="what">Specially Appointed Assistant Professor, School of Environment and Society,
+          Tokyo Institute of Technology</div>
+        <div class="when">Oct. 2023 – Sep. 2024</div>
+      </div>
+      <div class="row">
+        <div class="what">Research Fellow (DC1), Japan Society for the Promotion of Science (JSPS)</div>
+        <div class="when">Apr. 2020 – Sep. 2023</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="row">
+        <div class="what">Ph.D. in Information Science, Tohoku University
+          <span class="meta">Advisor: Prof. Takashi Akamatsu</span></div>
+        <div class="when">2023</div>
+      </div>
+      <div class="row">
+        <div class="what">M.S. in Information Science, Tohoku University</div>
+        <div class="when">2020</div>
+      </div>
+      <div class="row">
+        <div class="what">B.S. in Civil Engineering, Tohoku University</div>
+        <div class="when">2018</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Refereed Journal Articles</h2>
+      <ol class="list">
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2026).
+          Queue Replacement Approach to Dynamic User Equilibrium Assignment with Route and Departure Time Choice.
+          <span class="venue">Transportation Research Part B: Methodological</span>, 211, 103523.
+          <a class="doi" href="https://doi.org/10.1016/j.trb.2026.103523">doi:10.1016/j.trb.2026.103523</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Yuki Takayama (2025).
+          Demand-driven transport network formation: Emergence of a hub-and-spoke structure <span class="tag">(in Japanese)</span>.
+          <span class="venue">Journal of JSCE</span>, 81(6), ID:24-00167.
+          <a class="doi" href="https://doi.org/10.2208/jscejj.24-00167">doi:10.2208/jscejj.24-00167</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2024).
+          Queue replacement principle for corridor problems with heterogeneous commuters.
+          <span class="venue">Transportation Research Part B: Methodological</span>, 187, 103024.
+          <a class="doi" href="https://doi.org/10.1016/j.trb.2024.103024">doi:10.1016/j.trb.2024.103024</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2024).
+          A Paradox of Telecommuting and Staggered Work Hours in the Bottleneck Model.
+          <span class="venue">Transportation Science</span>, 58(6), 1335–1351.
+          <a class="doi" href="https://doi.org/10.1287/trsc.2024.0520">doi:10.1287/trsc.2024.0520</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Masanao Wakui, Takashi Akamatsu (2023).
+          An efficient solution method for the Fujita–Ogawa model in ultra-large-scale discrete space
+          <span class="tag">(in Japanese)</span>.
+          <span class="venue">Journal of JSCE</span>, 79(4).
+        </li>
+        <li>
+          Masanao Wakui, <span class="me">Takara Sakai</span>, Takashi Akamatsu (2023).
+          An efficient solution method for dynamic user equilibrium assignment in large-scale networks
+          <span class="tag">(in Japanese)</span>.
+          <span class="venue">Journal of JSCE</span>, 79(4).
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2021).
+          Departure time choice problem in tandem bottlenecks with heterogeneous schedule cost
+          <span class="tag">(in Japanese)</span>.
+          <span class="venue">Journal of JSCE, Ser. D3 (Infrastructure Planning and Management)</span>, 77(4), 330–345.
+          <a class="doi" href="https://doi.org/10.2208/jscejipm.77.4_330">doi:10.2208/jscejipm.77.4_330</a>
+        </li>
+        <li>
+          Takashi Akamatsu, Takeshi Nagae, Minoru Osawa, Koki Satsukawa, <span class="me">Takara Sakai</span>,
+          Daijiro Mizutani (2021).
+          Model-based analysis on social acceptability and feasibility of a focused protection strategy against the
+          COVID-19 pandemic.
+          <span class="venue">Scientific Reports</span>, 11, 2003.
+          <a class="doi" href="https://doi.org/10.1038/s41598-021-81630-9">doi:10.1038/s41598-021-81630-9</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu (2019).
+          Congestion patterns and stability of the Macroscopic Fundamental Diagram in the Tokyo metropolitan
+          expressway network <span class="tag">(in Japanese)</span>.
+          <span class="venue">Journal of JSCE, Ser. D3 (Infrastructure Planning and Management)</span>, 75(2), 97–108.
+          <a class="doi" href="https://doi.org/10.2208/jscejipm.75.97">doi:10.2208/jscejipm.75.97</a>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Working Papers &amp; Preprints</h2>
+      <ol class="list">
+        <li>
+          <span class="me">Takara Sakai</span>, Riki Kawase (2026).
+          Coarse Preference Reporting in the Bottleneck Model: Approximate Strategyproofness and Efficiency.
+          <a class="doi" href="https://arxiv.org/abs/2606.17400">arXiv:2606.17400</a>
+        </li>
+        <li>
+          Mingzhi Xiao, <span class="me">Takara Sakai</span>, Daisuke Murakami, Yuki Takayama (2025).
+          When Does Tourism Raise Land Prices? Threshold Effects, Superstar Cities, and Policy Lessons from Japan.
+          <a class="doi" href="https://arxiv.org/abs/2509.04307">arXiv:2509.04307</a>
+        </li>
+        <li>
+          Shota Fujishima, <span class="me">Takara Sakai</span>, Yuki Takayama (2025).
+          Quantifying Congestion Externalities in Road Networks: A structural estimation approach using a stochastic
+          evolutionary model.
+          <a class="doi" href="https://www.rieti.go.jp/jp/publications/summary/25060004.html">RIETI Discussion Paper 25-E-055</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Koki Satsukawa, Takashi Akamatsu (2022).
+          Non-existence of queues for system optimal departure patterns in tree networks.
+          <a class="doi" href="https://arxiv.org/abs/2205.06015">arXiv:2205.06015</a>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Selected International Conference Presentations</h2>
+      <ol class="list">
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Queue Replacement Approach to Dynamic User Equilibrium Assignment with Route and Departure Time Choice.
+          <span class="venue">26th International Symposium on Transportation and Traffic Theory (ISTTT)</span>,
+          Munich, Germany, Jul. 2026.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Yasunari Hikima.
+          Inverse Optimal Transport for Bottleneck Models: Estimating Temporal Travel Demand Distributions.
+          <span class="venue">INFORMS Transportation and Logistics Society Third Triennial Conference (TSL)</span>,
+          MIT, MA, USA, Jul. 2026.
+        </li>
+        <li>
+          Mingzhi Xiao, <span class="me">Takara Sakai</span>, Yuki Takayama.
+          High-Speed Rail and Population Agglomeration in China: Implications for Urban Planning and Regional Development.
+          <span class="venue">World Conference on Transport Research (WCTR)</span>, Toulouse, France, Jul. 2026.
+        </li>
+        <li>
+          Mingzhi Xiao, Yuki Takayama, <span class="me">Takara Sakai</span>.
+          The Role of High-Speed Rail in Shaping Chinese County-Level Economic Structures.
+          <span class="venue">HKSTS International Conference</span>, Hong Kong, Dec. 2025.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          A Paradox of Telecommuting and Staggered Work Hours in the Bottleneck Model.
+          <span class="venue">25th International Symposium on Transportation and Traffic Theory (ISTTT)</span>,
+          Ann Arbor, MI, USA, Jul. 2024.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>.
+          A Paradox of Telecommuting and Staggered Work Hours in the Bottleneck Model.
+          <span class="venue">International Seminar, Huazhong University of Science and Technology</span>,
+          Wuhan, China, Mar. 2024.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Welfare impacts of remote and flexible working policies in the bottleneck model.
+          <span class="venue">11th Symposium of the European Association for Research in Transportation (hEART)</span>,
+          ETH Zurich, Sep. 2023.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Queue replacement principle for corridor problems with heterogeneous commuters.
+          <span class="venue">9th International Symposium on Dynamic Traffic Assignment (DTA)</span>,
+          Northwestern University, USA, Jul. 2023.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Departure time choice problems in a corridor network with heterogeneous value of schedule delay.
+          <span class="venue">25th HKSTS International Conference</span>, online, Dec. 2021.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu.
+          Spatio-Temporal Regularities of Traffic Congestion Patterns in the Metropolitan Expressway Network.
+          <span class="venue">5th CWRU–Tohoku Joint Workshop</span>, Tohoku University, Japan, Aug. 2018.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Grants &amp; Fellowships</h2>
+      <ol class="list">
+        <li>
+          Reconstruction of dynamic user equilibrium assignment theory based on the queue replacement principle.
+          <span class="meta">JSPS KAKENHI, Grant-in-Aid for Early-Career Scientists (No. 26K17486) ·
+            Apr. 2026 – Mar. 2029 · Principal Investigator</span>
+        </li>
+        <li>
+          Mathematical analysis of road traffic network systems with mixed cooperative and non-cooperative vehicles.
+          <span class="meta">Obayashi Foundation, Research Grant · Apr. 2026 – Mar. 2027 · Principal Investigator</span>
+        </li>
+        <li>
+          Assistant Placement Program.
+          <span class="meta">Institute of Science Tokyo, DE&amp;I Division · Apr. 2025 – Sep. 2026 ·
+            Principal Investigator</span>
+        </li>
+        <li>
+          Stability analysis of transport systems using Max-Plus algebra.
+          <span class="meta">Institute of Science Tokyo, Academy for Broad-based Basic Research,
+            New Research Development Incentive Grant · Sep. 2024 – Mar. 2026 ·
+            Co-Investigator (PI: Riki Kawase)</span>
+        </li>
+        <li>
+          Development of a traffic network equilibrium model capable of representing and manipulating
+          information- and strategy-sharing among vehicles.
+          <span class="meta">JSPS KAKENHI, Grant-in-Aid for Research Activity Start-up (No. 24K22973) ·
+            Aug. 2024 – Mar. 2027 · Principal Investigator</span>
+        </li>
+        <li>
+          Complementary and conflicting effects of commuting congestion mitigation measures at different
+          spatio-temporal scales.
+          <span class="meta">Obayashi Foundation, Research Grant · Apr. 2024 – Mar. 2025 · Principal Investigator</span>
+        </li>
+        <li>
+          Traffic control utilizing congestion pattern information in urban expressway networks.
+          <span class="meta">JSPS KAKENHI, Grant-in-Aid for JSPS Fellows (No. 20J21744) ·
+            Apr. 2020 – Mar. 2023 · Principal Investigator</span>
+        </li>
+      </ol>
+    </section>
+
+    <p class="updated">Last updated: July 2026</p>
+  </div>
+</body>
+
+</html>
