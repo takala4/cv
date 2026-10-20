@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>履歴書・研究業績 — 酒井 高良</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+    :root {
+      --ink: #111111;
+      --soft: #111111;
+      --muted: #1a1a1a;
+      --line: #d9dce0;
+      --accent: #111111;
+      --accent-soft: #ececee;
+      --page: 210mm;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Inter", "Noto Sans JP", system-ui, -apple-system, "Segoe UI",
+        "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      background: #eceff1;
+      font-feature-settings: "kern" 1, "liga" 1, "palt" 1;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Screen-only helper banner */
+    .toolbar {
+      max-width: var(--page);
+      margin: 18px auto 0;
+      padding: 12px 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--soft);
+    }
+    .toolbar kbd {
+      background: #f5f7fa; border: 1px solid #cbd2d9; border-bottom-width: 2px;
+      border-radius: 4px; padding: 1px 6px; font-size: 12px; color: var(--ink);
+    }
+
+    .page {
+      max-width: var(--page);
+      margin: 18px auto;
+      padding: 26mm 22mm;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 6px 30px rgba(31, 41, 51, .10);
+    }
+
+    /* ---- Header ---- */
+    header {
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 8px;
+    }
+    .name {
+      font-family: "Noto Sans JP", "Space Grotesk", "Inter", sans-serif;
+      font-size: 20pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--ink);
+    }
+    .name .kana {
+      font-size: 11pt;
+      font-weight: 500;
+      letter-spacing: .5px;
+      margin-left: 10px;
+      color: var(--muted);
+    }
+    .name .romaji {
+      font-family: "Space Grotesk", "Inter", sans-serif;
+      font-size: 12pt;
+      font-weight: 600;
+      margin-left: 10px;
+      color: var(--muted);
+    }
+    .headline {
+      color: var(--ink);
+      font-size: 11pt;
+      font-weight: 500;
+      letter-spacing: .1px;
+      margin: 9px 0 14px;
+    }
+    .contact {
+      font-size: 10pt;
+      color: var(--soft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 0;
+    }
+    .contact > span { display: inline-flex; align-items: center; }
+    .contact > span:not(:last-child)::after {
+      content: "";
+      width: 4px; height: 4px;
+      margin: 0 12px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: .6;
+    }
+    .contact a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .contact a:hover { text-decoration: underline; }
+
+    /* ---- Sections ---- */
+    section { margin-top: 30px; }
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Noto Sans JP", "Space Grotesk", "Inter", sans-serif;
+      font-size: 12pt;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 14px;
+    }
+    h2::before {
+      content: "";
+      width: 14px; height: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      flex: none;
+    }
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* two-column rows (text + dates) */
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 20px;
+      padding: 7px 0;
+    }
+    .row + .row { border-top: 1px solid var(--line); }
+    .row .what { font-weight: 500; }
+    .row .when {
+      color: var(--muted);
+      font-size: 10pt;
+      font-weight: 600;
+      letter-spacing: .3px;
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 1px;
+    }
+
+    ul.chips {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+    ul.chips li {
+      background: var(--accent-soft);
+      color: var(--ink);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 10pt;
+      font-weight: 500;
+    }
+
+    /* Numbered publication / talk lists with hanging indent */
+    ol.list { margin: 0; padding: 0; list-style: none; counter-reset: item; }
+    ol.list > li {
+      position: relative;
+      padding-left: 30px;
+      margin: 0;
+      padding-top: 11px;
+      padding-bottom: 11px;
+      counter-increment: item;
+    }
+    ol.list > li + li { border-top: 1px solid var(--line); }
+    ol.list > li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 20px;
+      height: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      font-size: 8pt;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* English venue: italic serif. Japanese venue: upright (Japanese italics render poorly). */
+    .venue {
+      font-family: "Spectral", Georgia, serif;
+      font-style: italic;
+      font-size: 11pt;
+      color: var(--ink);
+    }
+    .venue-ja {
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .meta { display: block; color: var(--muted); font-size: 10pt; margin-top: 2px; }
+    .me { font-weight: 700; color: var(--ink); }
+    a.doi {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 10pt;
+      font-weight: 500;
+    }
+    a.doi:hover { text-decoration: underline; }
+    .tag { color: var(--muted); font-style: normal; font-size: 10pt; }
+
+    .updated {
+      margin-top: 30px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10pt;
+      text-align: right;
+    }
+
+    @media print {
+      body { background: #fff; font-size: 10.5pt; line-height: 1.5; }
+      .toolbar { display: none; }
+      .page { box-shadow: none; margin: 0 auto; padding: 0; max-width: none; border-radius: 0; }
+      @page { size: A4; margin: 15mm 15mm; }
+      section { margin-top: 22px; }
+      section.compact { break-inside: avoid; }
+      h2 { break-after: avoid; }
+      ol.list > li, .row { break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toolbar">
+    印刷用CV（日本語版）です。ブラウザで <kbd>Ctrl</kbd>+<kbd>P</kbd> →「送信先: PDFに保存」でPDF化できます（この案内枠は印刷されません）。
+    English version: <a href="cv_en.html">cv_en.html</a>
+  </div>
+
+  <div class="page">
+    <header>
+      <p class="name">酒井 高良<span class="kana">さかい たから</span><span class="romaji">Takara Sakai</span></p>
+      <p class="headline">東京科学大学 環境・社会理工学院 特任助教（高山研究室） · 合同会社くるみ堂 代表</p>
+      <div class="contact">
+        <span><a href="mailto:sakai.t.dcad@m.isct.ac.jp">sakai.t.dcad@m.isct.ac.jp</a></span>
+        <span>〒152-8550 東京都目黒区大岡山2-12-1 東京科学大学 大岡山西6号館 410室</span>
+        <span><a href="https://researchmap.jp/treasure">researchmap</a></span>
+        <span><a href="https://scholar.google.co.jp/citations?hl=en&user=0mXKGE4AAAAJ">Google Scholar</a></span>
+        <span><a href="https://github.com/takala4/">GitHub</a></span>
+      </div>
+    </header>
+
+    <section class="compact">
+      <h2>研究分野</h2>
+      <ul class="chips">
+        <li>交通工学・交通理論</li>
+        <li>地域科学・都市経済学</li>
+        <li>最適化・制御・アルゴリズム</li>
+        <li>ゲーム理論・メカニズムデザイン</li>
+      </ul>
+    </section>
+
+    <section class="compact">
+      <h2>職歴</h2>
+      <div class="row">
+        <div class="what">合同会社くるみ堂 代表</div>
+        <div class="when">2025年7月 – 現在</div>
+      </div>
+      <div class="row">
+        <div class="what">東京科学大学 環境・社会理工学院 特任助教</div>
+        <div class="when">2024年10月 – 現在</div>
+      </div>
+      <div class="row">
+        <div class="what">東京工業大学 環境・社会理工学院 特任助教</div>
+        <div class="when">2023年10月 – 2024年9月</div>
+      </div>
+      <div class="row">
+        <div class="what">日本学術振興会 特別研究員（DC1）</div>
+        <div class="when">2020年4月 – 2023年9月</div>
+      </div>
+    </section>
+
+    <section class="compact">
+      <h2>学歴</h2>
+      <div class="row">
+        <div class="what">東北大学大学院情報科学研究科 博士課程修了　博士（情報科学）
+          <span class="meta">指導教員：赤松 隆 教授</span></div>
+        <div class="when">2023年9月</div>
+      </div>
+      <div class="row">
+        <div class="what">東北大学大学院情報科学研究科 修士課程修了</div>
+        <div class="when">2020年3月</div>
+      </div>
+      <div class="row">
+        <div class="what">東北大学工学部建築・社会環境工学科 卒業</div>
+        <div class="when">2018年3月</div>
+      </div>
+      <div class="row">
+        <div class="what">東京都立戸山高等学校 卒業</div>
+        <div class="when">2014年3月</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>査読付き論文</h2>
+      <ol class="list">
+        <li>
+          宮津 周弥, <span class="me">酒井 高良</span>, 高山 雄貴 (2026).
+          通勤者の異質性に起因する動的混雑課金導入効果の空間的不均質性.
+          <span class="venue-ja">土木学会論文集</span>, 82(10), ID:26-00022.
+          <a class="doi" href="https://doi.org/10.2208/jscejj.26-00022">doi:10.2208/jscejj.26-00022</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2026).
+          Queue Replacement Approach to Dynamic User Equilibrium Assignment with Route and Departure Time Choice.
+          <span class="venue">Transportation Research Part B: Methodological</span>, 211, 103523.
+          <a class="doi" href="https://doi.org/10.1016/j.trb.2026.103523">doi:10.1016/j.trb.2026.103523</a>
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 高山 雄貴 (2025).
+          需要主導型の輸送ネットワーク形成：Hub and Spoke構造の創発.
+          <span class="venue-ja">土木学会論文集</span>, 81(6), ID:24-00167.
+          <a class="doi" href="https://doi.org/10.2208/jscejj.24-00167">doi:10.2208/jscejj.24-00167</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2024).
+          Queue replacement principle for corridor problems with heterogeneous commuters.
+          <span class="venue">Transportation Research Part B: Methodological</span>, 187, 103024.
+          <a class="doi" href="https://doi.org/10.1016/j.trb.2024.103024">doi:10.1016/j.trb.2024.103024</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa (2024).
+          A Paradox of Telecommuting and Staggered Work Hours in the Bottleneck Model.
+          <span class="venue">Transportation Science</span>, 58(6), 1335–1351.
+          <a class="doi" href="https://doi.org/10.1287/trsc.2024.0520">doi:10.1287/trsc.2024.0520</a>
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 涌井 優尚, 赤松 隆 (2023).
+          超大規模離散空間におけるFujita-Ogawaモデルの効率的解法.
+          <span class="venue-ja">土木学会論文集</span>, 79(4), ID:22-00341.
+          <a class="doi" href="https://doi.org/10.2208/jscejj.22-00341">doi:10.2208/jscejj.22-00341</a>
+        </li>
+        <li>
+          涌井 優尚, <span class="me">酒井 高良</span>, 赤松 隆 (2023).
+          大規模ネットワークにおける動的利用者均衡配分の効率的解法.
+          <span class="venue-ja">土木学会論文集</span>, 79(4), ID:22-00301.
+          <a class="doi" href="https://doi.org/10.2208/jscejj.22-00301">doi:10.2208/jscejj.22-00301</a>
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆, 佐津川 功季 (2021).
+          スケジュールコストの異質性を考慮したタンデムボトルネック出発時刻選択問題.
+          <span class="venue-ja">土木学会論文集D3（土木計画学）</span>, 77(4), 330–345.
+          <a class="doi" href="https://doi.org/10.2208/jscejipm.77.4_330">doi:10.2208/jscejipm.77.4_330</a>
+        </li>
+        <li>
+          Takashi Akamatsu, Takeshi Nagae, Minoru Osawa, Koki Satsukawa, <span class="me">Takara Sakai</span>,
+          Daijiro Mizutani (2021).
+          Model-based analysis on social acceptability and feasibility of a focused protection strategy against the
+          COVID-19 pandemic.
+          <span class="venue">Scientific Reports</span>, 11, 2003.
+          <a class="doi" href="https://doi.org/10.1038/s41598-021-81630-9">doi:10.1038/s41598-021-81630-9</a>
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆 (2019).
+          首都圏高速道路網における渋滞パターンとMacroscopic Fundamental Diagramの安定性.
+          <span class="venue-ja">土木学会論文集D3（土木計画学）</span>, 75(2), 97–108.
+          <a class="doi" href="https://doi.org/10.2208/jscejipm.75.97">doi:10.2208/jscejipm.75.97</a>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>プレプリント・ワーキングペーパー</h2>
+      <ol class="list">
+        <li>
+          <span class="me">Takara Sakai</span>, Hiroyuki Hasada (2026).
+          Route Based Map Matching via a Structured Codebook and Token Sequence Decoding.
+          <a class="doi" href="https://arxiv.org/abs/2607.22543">arXiv:2607.22543</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Riki Kawase (2026).
+          Coarse Preference Reporting in the Bottleneck Model: Approximate Strategyproofness and Efficiency.
+          <a class="doi" href="https://arxiv.org/abs/2606.17400">arXiv:2606.17400</a>
+        </li>
+        <li>
+          Mingzhi Xiao, <span class="me">Takara Sakai</span>, Daisuke Murakami, Yuki Takayama (2025).
+          When Does Tourism Raise Land Prices? Threshold Effects, Superstar Cities, and Policy Lessons from Japan.
+          <a class="doi" href="https://arxiv.org/abs/2509.04307">arXiv:2509.04307</a>
+        </li>
+        <li>
+          Shota Fujishima, <span class="me">Takara Sakai</span>, Yuki Takayama (2025).
+          Quantifying Congestion Externalities in Road Networks: A structural estimation approach using a stochastic
+          evolutionary model.
+          <a class="doi" href="https://www.rieti.go.jp/jp/publications/summary/25060004.html">RIETI Discussion Paper 25-E-055</a>
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Koki Satsukawa, Takashi Akamatsu (2022).
+          Non-existence of queues for system optimal departure patterns in tree networks.
+          <a class="doi" href="https://arxiv.org/abs/2205.06015">arXiv:2205.06015</a>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>国際会議発表</h2>
+      <ol class="list">
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Queue Replacement Approach to Dynamic User Equilibrium Assignment with Route and Departure Time Choice.
+          <span class="venue">26th International Symposium on Transportation and Traffic Theory (ISTTT)</span>,
+          Munich, Germany, 2026年7月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Yasunari Hikima.
+          Inverse Optimal Transport for Bottleneck Models: Estimating Temporal Travel Demand Distributions.
+          <span class="venue">INFORMS Transportation and Logistics Society Third Triennial Conference (TSL)</span>,
+          MIT, MA, USA, 2026年7月.
+        </li>
+        <li>
+          Mingzhi Xiao, <span class="me">Takara Sakai</span>, Yuki Takayama.
+          High-Speed Rail and Population Agglomeration in China: Implications for Urban Planning and Regional Development.
+          <span class="venue">World Conference on Transport Research (WCTR)</span>, Toulouse, France, 2026年7月.
+        </li>
+        <li>
+          Mingzhi Xiao, Yuki Takayama, <span class="me">Takara Sakai</span>.
+          The Role of High-Speed Rail in Shaping Chinese County-Level Economic Structures.
+          <span class="venue">HKSTS International Conference</span>, Hong Kong, 2025年12月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          A Paradox of Telecommuting and Staggered Work Hours in the Bottleneck Model.
+          <span class="venue">25th International Symposium on Transportation and Traffic Theory (ISTTT)</span>,
+          Ann Arbor, MI, USA, 2024年7月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>.
+          A Paradox of Telecommuting and Staggered Work Hours in the Bottleneck Model.
+          <span class="venue">International Seminar, Huazhong University of Science and Technology</span>,
+          Wuhan, China, 2024年3月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Welfare impacts of remote and flexible working policies in the bottleneck model.
+          <span class="venue">11th Symposium of the European Association for Research in Transportation (hEART)</span>,
+          ETH Zurich, 2023年9月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Queue replacement principle for corridor problems with heterogeneous commuters.
+          <span class="venue">9th International Symposium on Dynamic Traffic Assignment (DTA)</span>,
+          Northwestern University, USA, 2023年7月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu, Koki Satsukawa.
+          Departure time choice problems in a corridor network with heterogeneous value of schedule delay.
+          <span class="venue">25th HKSTS International Conference</span>, online, 2021年12月.
+        </li>
+        <li>
+          <span class="me">Takara Sakai</span>, Takashi Akamatsu.
+          Spatio-Temporal Regularities of Traffic Congestion Patterns in the Metropolitan Expressway Network.
+          <span class="venue">5th CWRU–Tohoku Joint Workshop</span>, Tohoku University, Japan, 2018年8月.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>国内学会・研究会発表</h2>
+      <ol class="list">
+        <li>
+          <span class="me">酒井 高良</span>.
+          動的利用者均衡状態の実在性：車両軌跡データを用いた試行的実証.
+          <span class="venue-ja">第16回 高速道路の交通データ利用に関する勉強会</span>, 徳島, 2026年9月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>（くるみ堂）.
+          RISU: Real-time Interactive Simulator for Urban mobility.
+          <span class="venue-ja">第16回 高速道路の交通データ利用に関する勉強会</span>, 徳島, 2026年9月.
+        </li>
+        <li>
+          武田 翼, <span class="me">酒井 高良</span>.
+          協調・非協調車両混在下における交通量配分：協調車両比率とシステム効率の非単調性.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          坪井 亮磨, 高山 雄貴, <span class="me">酒井 高良</span>.
+          定量的空間経済モデルに基づく交通政策評価手法の開発：交通混雑緩和政策の人口分布への影響分析.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          柳川 世音, 高山 雄貴, <span class="me">酒井 高良</span>.
+          共有型モビリティと公共交通の相補的・相反的効果.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          越路 泰成, 高山 雄貴, <span class="me">酒井 高良</span>.
+          Right angle cost functionに基づく利用者均衡配分の特性.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          高柳 快成, 高山 雄貴, <span class="me">酒井 高良</span>.
+          共有型モビリティ導入が公共交通需要と都市の空間構造に及ぼす影響の理論的解析.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          宮津 周弥, <span class="me">酒井 高良</span>, 高山 雄貴.
+          居住地選択を考慮した複数ボトルネックモデルの開発：静的混雑課金による渋滞空間分布の内生的変化.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          山口 慈永, <span class="me">酒井 高良</span>, 高山 雄貴.
+          逆最適輸送アプローチによる地域間産業連関表の空間詳細化.
+          <span class="venue-ja">第73回土木計画学研究発表会・春大会</span>, 大同大学, 2026年6月.
+        </li>
+        <li>
+          河瀬 理貴, <span class="me">酒井 高良</span>.
+          分布曖昧性下での混雑施設の費用回収定理.
+          <span class="venue-ja">第326回 待ち行列研究部会</span>, 東京, 2026年5月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 引間 泰成.
+          Inverse Optimal Transport for Bottleneck Models: Estimating Temporal Travel Demand Distributions.
+          <span class="venue-ja">Regional Complexity Workshop 2026</span>, 香川大学, 2026年2月.
+        </li>
+        <li>
+          高柳 快成, 高山 雄貴, <span class="me">酒井 高良</span>.
+          共有型モビリティ導入が公共交通需要に及ぼす影響.
+          <span class="venue-ja">第72回土木計画学研究発表会・秋大会</span>, 福井工業大学, 2025年11月.
+        </li>
+        <li>
+          越路 泰成, 高山 雄貴, <span class="me">酒井 高良</span>.
+          Right angle cost functionsに基づく交通量配分.
+          <span class="venue-ja">第72回土木計画学研究発表会・秋大会</span>, 福井工業大学, 2025年11月.
+        </li>
+        <li>
+          齋藤 暖, 肖 明智, <span class="me">酒井 高良</span>, 高山 雄貴.
+          道路ネットワーク形状が地価に与える影響.
+          <span class="venue-ja">第72回土木計画学研究発表会・秋大会</span>, 福井工業大学, 2025年11月.
+        </li>
+        <li>
+          河瀬 理貴, 瀬尾 亨, <span class="me">酒井 高良</span>.
+          最適輸送理論と最適制御理論に基づく道路ネットワーク上の交通状態間距離の提案.
+          <span class="venue-ja">第72回土木計画学研究発表会・秋大会</span>, 福井工業大学, 2025年11月.
+        </li>
+        <li>
+          東山 洋平, <span class="me">酒井 高良</span>, 高山 雄貴, 苗 璐.
+          定量的都市モデルによる宇都宮ライトレールの整備効果分析.
+          <span class="venue-ja">第72回土木計画学研究発表会・秋大会</span>, 福井工業大学, 2025年11月.
+        </li>
+        <li>
+          Riki Kawase, <span class="me">Takara Sakai</span>.
+          Cost Recovery of Congestible Facilities under Distributional Ambiguity.
+          <span class="venue-ja">RIMS Workshop 2025 "New Developments for Mathematical Models and Their Applications in Uncertain Environments"</span>, 京都, 2025年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆, 佐津川 功季.
+          Queue Replacement Approach to Dynamic User Equilibrium Assignment with Route and Departure Time Choice.
+          <span class="venue-ja">第71回土木計画学研究発表会・春大会</span>, 香川大学, 2025年6月.
+        </li>
+        <li>
+          神谷 竜太郎, <span class="me">酒井 高良</span>, 高山 雄貴.
+          需要主導型輸送ネットワーク形成ゲームの安定均衡解の特性.
+          <span class="venue-ja">第71回土木計画学研究発表会・春大会</span>, 香川大学, 2025年6月.
+        </li>
+        <li>
+          宮津 周弥, <span class="me">酒井 高良</span>, 高山 雄貴.
+          動的混雑課金が属性の異なる利用者の通勤パターンにもたらす影響.
+          <span class="venue-ja">第71回土木計画学研究発表会・春大会</span>, 香川大学, 2025年6月.
+        </li>
+        <li>
+          藤嶋 翔太, <span class="me">酒井 高良</span>, 高山 雄貴.
+          Quantifying congestion externalities in road networks: A structural estimation approach using stochastic evolutionary model.
+          <span class="venue-ja">第71回土木計画学研究発表会・春大会</span>, 香川大学, 2025年6月.
+        </li>
+        <li>
+          藤嶋 翔太, <span class="me">酒井 高良</span>, 高山 雄貴.
+          Quantifying congestion externalities in road networks: A structural estimation approach using stochastic evolutionary model.
+          <span class="venue-ja">日本経済学会2025年度春季大会</span>, 中京大学, 2025年5月.
+        </li>
+        <li>
+          藤嶋 翔太, <span class="me">酒井 高良</span>, 高山 雄貴.
+          Quantifying congestion externalities in road networks: A structural estimation approach using stochastic evolutionary model.
+          <span class="venue-ja">RIETI DP検討会</span>, 2025年2月.
+        </li>
+        <li>
+          藤嶋 翔太, <span class="me">酒井 高良</span>, 高山 雄貴.
+          Quantifying congestion externalities in road networks: A structural estimation approach using stochastic evolutionary model.
+          <span class="venue-ja">第38回応用地域学会（ARSC）研究発表大会</span>, 九州産業大学, 2024年12月.
+        </li>
+        <li>
+          涌井 優尚, 長江 剛志, <span class="me">酒井 高良</span>, 赤松 隆.
+          経路・出発時刻同時選択型の動的均衡配分に対する収束的解法.
+          <span class="venue-ja">第68回土木計画学研究発表会・秋大会</span>, 東京都立大学, 2023年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 涌井 優尚, 赤松 隆.
+          超大規模離散空間におけるFujita-Ogawaモデルの効率的解法.
+          <span class="venue-ja">第36回応用地域学会（ARSC）研究発表大会</span>, 山梨大学, 2022年12月.
+        </li>
+        <li>
+          涌井 優尚, <span class="me">酒井 高良</span>, 赤松 隆.
+          超大規模離散空間におけるFujita-Ogawaモデルの効率的解法.
+          <span class="venue-ja">第66回土木計画学研究発表会・秋大会</span>, 琉球大学, 2022年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>.
+          動的な交通ネットワーク流問題における均衡と最適.
+          <span class="venue-ja">ネットワーク科学研究会2022</span>, 同志社大学, 2022年8月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆, 佐津川 功季.
+          動的システム最適配分の大域的最適解：待ち行列は存在しうるか.
+          <span class="venue-ja">第65回土木計画学研究発表会・春大会</span>, 広島大学（オンライン）, 2022年6月.
+        </li>
+        <li>
+          涌井 優尚, <span class="me">酒井 高良</span>, 赤松 隆.
+          大規模ネットワークにおける動的利用者均衡配分の効率的解法.
+          <span class="venue-ja">第65回土木計画学研究発表会・春大会</span>, 広島大学（オンライン）, 2022年6月.
+        </li>
+        <li>
+          馬場 静羽, 井上 亮, <span class="me">酒井 高良</span>, 赤松 隆.
+          テンソル分解に基づく首都高速道路の交通渋滞時空間パターンの解明.
+          <span class="venue-ja">第65回土木計画学研究発表会・春大会</span>, 広島大学（オンライン）, 2022年6月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>.
+          複数ボトルネック出発時刻選択問題を斬る.
+          <span class="venue-ja">東京工業大学 TSUセミナー</span>, オンライン, 2022年2月.
+        </li>
+        <li>
+          涌井 優尚, <span class="me">酒井 高良</span>, 赤松 隆.
+          動的利用者均衡配分の効率的数値解法.
+          <span class="venue-ja">第64回土木計画学研究発表会・秋大会</span>, 福島大学（オンライン）, 2021年12月.
+        </li>
+        <li>
+          馬場 静羽, 井上 亮, <span class="me">酒井 高良</span>, 赤松 隆.
+          テンソル分解を用いた首都圏高速道路網における交通渋滞の時空間特性の解析.
+          <span class="venue-ja">第64回土木計画学研究発表会・秋大会</span>, 福島大学（オンライン）, 2021年12月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆, 佐津川 功季.
+          利用者の異質性を考慮したコリドーネットワーク出発時刻選択問題.
+          <span class="venue-ja">第35回応用地域学会（ARSC）研究発表大会</span>, 金沢大学（オンライン）, 2021年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆, 佐津川 功季.
+          スケジュールコストの異質性を考慮したタンデムボトルネック出発時刻選択問題.
+          <span class="venue-ja">第63回土木計画学研究発表会・春大会</span>, 東北大学（オンライン）, 2021年6月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          多起点多終点コリドーネットワークにおける動的利用者均衡配分.
+          <span class="venue-ja">第62回土木計画学研究発表会・秋大会</span>, 信州大学（オンライン）, 2020年11月.
+        </li>
+        <li>
+          馬場 静羽, <span class="me">酒井 高良</span>, 赤松 隆, 井上 亮.
+          テンソル分解を用いた首都圏高速道路網における渋滞特性抽出.
+          <span class="venue-ja">第62回土木計画学研究発表会・秋大会</span>, 信州大学（オンライン）, 2020年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>.
+          コリドーネットワークにおける動的システム最適配分.
+          <span class="venue-ja">都市・交通理論ドクター若手勉強会</span>, オンライン, 2020年9月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          多起点多終点コリドーネットワークにおける動的システム最適配分.
+          <span class="venue-ja">第61回土木計画学研究発表会・春大会</span>, 大阪大学, 2020年6月.
+        </li>
+        <li>
+          石川 裕太郎, <span class="me">酒井 高良</span>, 赤松 隆.
+          首都圏高速道路網における動的OD交通量推定モデルのパラメータ推定.
+          <span class="venue-ja">第60回土木計画学研究発表会・秋大会</span>, 富山大学, 2019年12月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          環状ネットワークにおける動的システム最適配分.
+          <span class="venue-ja">第60回土木計画学研究発表会・秋大会</span>, 富山大学, 2019年12月.
+        </li>
+        <li>
+          石川 裕太郎, <span class="me">酒井 高良</span>, 赤松 隆.
+          首都圏高速道路網における経路選択パターンの規則性.
+          <span class="venue-ja">第59回土木計画学研究発表会・春大会</span>, 名城大学, 2019年6月.
+        </li>
+        <li>
+          河向 隆志, <span class="me">酒井 高良</span>, 赤松 隆.
+          経路・出発時刻の選択を内生化した動的利用者均衡配分の効率的解法.
+          <span class="venue-ja">第59回土木計画学研究発表会・春大会</span>, 名城大学, 2019年6月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          首都圏高速道路網における渋滞パターンとMFDの関係性.
+          <span class="venue-ja">第58回土木計画学研究発表会・秋大会</span>, 大分大学, 2018年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          首都圏高速道路網における渋滞パターンの安定性.
+          <span class="venue-ja">CSIS DAYS 2018</span>, 東京大学柏キャンパス, 2018年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          首都圏高速道路網における渋滞の時空間分布の安定性.
+          <span class="venue-ja">第38回交通工学研究発表会</span>, 日本大学駿河台キャンパス, 2018年8月.
+          <span class="meta">第38回交通工学研究発表会論文集, No.33, pp.197–204, 2018.</span>
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>, 赤松 隆.
+          首都圏高速道路網における渋滞パターンの時空間規則性.
+          <span class="venue-ja">第57回土木計画学研究発表会・春大会</span>, 東京工業大学, 2018年6月.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>発表予定</h2>
+      <ol class="list">
+        <li>
+          <span class="me">酒井 高良</span>.
+          動的利用者均衡状態の実在性：車両軌跡データを用いた試行的実証.
+          <span class="venue-ja">第74回土木計画学研究発表会・秋大会</span>, 島根大学, 2026年12月.
+        </li>
+        <li>
+          福元 麟太郎, <span class="me">酒井 高良</span>, 高山 雄貴.
+          単一中心都市における立地選択を内生化した輸送ネットワーク形成モデル.
+          <span class="venue-ja">第74回土木計画学研究発表会・秋大会</span>, 島根大学, 2026年12月.
+        </li>
+        <li>
+          高柳 快成, 高山 雄貴, <span class="me">酒井 高良</span>.
+          共有型モビリティ導入が公共交通需要と都市の空間構造に及ぼす影響.
+          <span class="venue-ja">第74回土木計画学研究発表会・秋大会</span>, 島根大学, 2026年12月.
+        </li>
+        <li>
+          宮津 周弥, <span class="me">酒井 高良</span>, 高山 雄貴.
+          鉄道を考慮した複数ボトルネックモデル：道路渋滞と列車内混雑の相互作用.
+          <span class="venue-ja">第74回土木計画学研究発表会・秋大会</span>, 島根大学, 2026年12月.
+        </li>
+        <li>
+          山口 慈永, <span class="me">酒井 高良</span>, 高山 雄貴.
+          全国市町村間産業連関表の作成：逆最適輸送アプローチ.
+          <span class="venue-ja">第74回土木計画学研究発表会・秋大会</span>, 島根大学, 2026年12月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>.
+          Bottleneck Model with Atomic Vehicles: Queue Replacement Principle and Decentralized Adjustment to Equilibrium.
+          <span class="venue-ja">Regional Complexity Workshop</span>, 国際高等研究所, 2026年11月.
+        </li>
+        <li>
+          <span class="me">酒井 高良</span>.
+          Coarse Preference Reporting in the Bottleneck Model: Approximate Strategyproofness and Efficiency.
+          <span class="venue-ja">第8回交通・都市理論ドクター若手勉強会</span>, 金沢大学, 2026年10月.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>研究費・助成</h2>
+      <ol class="list">
+        <li>
+          待ち行列置き換え原理に基づく動的利用者均衡配分理論の再構築.
+          <span class="meta">科学研究費助成事業 若手研究（課題番号 26K17486） · 2026年4月 – 2029年3月 · 研究代表者</span>
+        </li>
+        <li>
+          協調・非協調車両が混在する道路交通ネットワークシステムの数理解析.
+          <span class="meta">公益財団法人大林財団 研究助成 · 2026年4月 – 2027年3月 · 研究代表者</span>
+        </li>
+        <li>
+          アシスタント配置プログラム.
+          <span class="meta">東京科学大学 社会連携・DE&amp;I本部 DE&amp;I部門 · 2025年4月 – 2026年9月 · 代表者</span>
+        </li>
+        <li>
+          Max-Plus代数を用いた輸送システムの安定性解析.
+          <span class="meta">東京工業大学（東京科学大学） 広域基礎研究塾 新研究展開奨励金 · 2024年9月 – 2026年3月 ·
+            共同研究者（研究代表者：河瀬 理貴）</span>
+        </li>
+        <li>
+          車両間の情報共有と戦略共有を表現・操作可能な交通ネットワーク均衡モデルの開発.
+          <span class="meta">科学研究費助成事業 研究活動スタート支援（課題番号 24K22973） · 2024年8月 – 2027年3月 · 研究代表者</span>
+        </li>
+        <li>
+          時空間スケールの異なる通勤渋滞緩和施策の相補的・相反的効果.
+          <span class="meta">公益財団法人大林財団 研究助成 · 2024年4月 – 2025年3月 · 研究代表者</span>
+        </li>
+        <li>
+          都市高速道路網における渋滞パターン情報を活用した交通制御：渋滞をもって渋滞を制す.
+          <span class="meta">科学研究費助成事業 特別研究員奨励費（課題番号 20J21744） · 2020年4月 – 2023年3月 · 研究代表者</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="compact">
+      <h2>査読経験</h2>
+      <p style="margin: 0; padding: 11px 0 11px 30px;">Transportation Research Part B: Methodological, Transportation Science, Transportmetrica A: Transport Science, International Journal of Intelligent Transportation Systems Research, Cluster Computing, Economics, 土木学会論文集</p>
+    </section>
+
+    <p class="updated">最終更新：2026年10月</p>
+  </div>
+</body>
+
+</html>
